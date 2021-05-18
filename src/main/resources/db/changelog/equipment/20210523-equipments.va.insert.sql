@@ -1,0 +1,40 @@
+--liquibase formatted sql
+
+--changeset akimov-ve:equipments_insert
+
+INSERT INTO equipments(type_id, rental_id, total_amount, active_amount)
+VALUES ((SELECT id FROM equipment_types WHERE "name" = 'Велосипед взрослый'), (SELECT id FROM rentals WHERE "name" = 'Мотосалон STELS'), 10, 0),
+       ((SELECT id FROM equipment_types WHERE "name" = 'Велосипед детский'), (SELECT id FROM rentals WHERE "name" = 'Мотосалон STELS'), 10, 0),
+       ((SELECT id FROM equipment_types WHERE "name" = 'Велосипед шоссейный'), (SELECT id FROM rentals WHERE "name" = 'Мотосалон STELS'), 5, 0),
+       ((SELECT id FROM equipment_types WHERE "name" = 'Самокат взрослый'), (SELECT id FROM rentals WHERE "name" = 'Мотосалон STELS'), 15, 0),
+       ((SELECT id FROM equipment_types WHERE "name" = 'Самокат детский'), (SELECT id FROM rentals WHERE "name" = 'Мотосалон STELS'), 8, 0),
+       ((SELECT id FROM equipment_types WHERE "name" = 'Велосипед взрослый'), (SELECT id FROM rentals WHERE "name" = 'Магазин "Идрис"'), 10, 0),
+       ((SELECT id FROM equipment_types WHERE "name" = 'Велосипед детский'), (SELECT id FROM rentals WHERE "name" = 'Магазин "Идрис"'), 6, 0),
+       ((SELECT id FROM equipment_types WHERE "name" = 'Велосипед взрослый'), (SELECT id FROM rentals WHERE "name" = 'Мир спорта 24'), 15, 0),
+       ((SELECT id FROM equipment_types WHERE "name" = 'Велосипед детский'), (SELECT id FROM rentals WHERE "name" = 'Мир спорта 24'), 7, 0),
+       ((SELECT id FROM equipment_types WHERE "name" = 'Велосипед шоссейный'), (SELECT id FROM rentals WHERE "name" = 'Мир спорта 24'), 4, 0),
+       ((SELECT id FROM equipment_types WHERE "name" = 'Велосипед горный'), (SELECT id FROM rentals WHERE "name" = 'Мир спорта 24'), 2, 0),
+       ((SELECT id FROM equipment_types WHERE "name" = 'Велосипед электрический'), (SELECT id FROM rentals WHERE "name" = 'Мир спорта 24'), 2, 0),
+       ((SELECT id FROM equipment_types WHERE "name" = 'Самокат взрослый'), (SELECT id FROM rentals WHERE "name" = 'Мир спорта 24'), 20, 0),
+       ((SELECT id FROM equipment_types WHERE "name" = 'Самокат детский'), (SELECT id FROM rentals WHERE "name" = 'Мир спорта 24'), 15, 0),
+       ((SELECT id FROM equipment_types WHERE "name" = 'Самокат электрический'), (SELECT id FROM rentals WHERE "name" = 'Мир спорта 24'), 5, 0),
+       ((SELECT id FROM equipment_types WHERE "name" = 'Ролики взрослые'), (SELECT id FROM rentals WHERE "name" = 'Мир спорта 24'), 10, 0),
+       ((SELECT id FROM equipment_types WHERE "name" = 'Ролики детские'), (SELECT id FROM rentals WHERE "name" = 'Мир спорта 24'), 10, 0),
+       ((SELECT id FROM equipment_types WHERE "name" = 'Велосипед взрослый'), (SELECT id FROM rentals WHERE "name" = 'Сервис Олега'), 20, 0),
+       ((SELECT id FROM equipment_types WHERE "name" = 'Велосипед детский'), (SELECT id FROM rentals WHERE "name" = 'Сервис Олега'), 17, 0),
+       ((SELECT id FROM equipment_types WHERE "name" = 'Велосипед шоссейный'), (SELECT id FROM rentals WHERE "name" = 'Сервис Олега'), 10, 0),
+       ((SELECT id FROM equipment_types WHERE "name" = 'Велосипед горный'), (SELECT id FROM rentals WHERE "name" = 'Сервис Олега'), 10, 0),
+       ((SELECT id FROM equipment_types WHERE "name" = 'Велосипед электрический'), (SELECT id FROM rentals WHERE "name" = 'Сервис Олега'), 11, 0),
+       ((SELECT id FROM equipment_types WHERE "name" = 'Самокат взрослый'), (SELECT id FROM rentals WHERE "name" = 'Сервис Олега'), 20, 0),
+       ((SELECT id FROM equipment_types WHERE "name" = 'Самокат детский'), (SELECT id FROM rentals WHERE "name" = 'Сервис Олега'), 25, 0),
+       ((SELECT id FROM equipment_types WHERE "name" = 'Самокат электрический'), (SELECT id FROM rentals WHERE "name" = 'Сервис Олега'), 11, 0),
+       ((SELECT id FROM equipment_types WHERE "name" = 'Ролики взрослые'), (SELECT id FROM rentals WHERE "name" = 'Сервис Олега'), 15, 0),
+       ((SELECT id FROM equipment_types WHERE "name" = 'Ролики детские'), (SELECT id FROM rentals WHERE "name" = 'Сервис Олега'), 15, 0),
+       ((SELECT id FROM equipment_types WHERE "name" = 'Велосипед взрослый'), (SELECT id FROM rentals WHERE "name" = 'Прокат спортивного оборудования в НУ'), 15, 0),
+       ((SELECT id FROM equipment_types WHERE "name" = 'Велосипед горный'), (SELECT id FROM rentals WHERE "name" = 'Прокат спортивного оборудования в НУ'), 10, 0),
+       ((SELECT id FROM equipment_types WHERE "name" = 'Ролики взрослые'), (SELECT id FROM rentals WHERE "name" = 'Прокат спортивного оборудования в НУ'), 20, 0),
+       ((SELECT id FROM equipment_types WHERE "name" = 'Велосипед взрослый'), (SELECT id FROM rentals WHERE "name" = 'Катай везде'), 13, 0),
+       ((SELECT id FROM equipment_types WHERE "name" = 'Велосипед детский'), (SELECT id FROM rentals WHERE "name" = 'Катай везде'), 9, 0),
+       ((SELECT id FROM equipment_types WHERE "name" = 'Самокат детский'), (SELECT id FROM rentals WHERE "name" = 'Катай везде'), 9, 0),
+       ((SELECT id FROM equipment_types WHERE "name" = 'Самокат электрический'), (SELECT id FROM rentals WHERE "name" = 'Катай везде'), 5, 0)
+;
