@@ -1,0 +1,3 @@
+[submodule "yanao-rental-schemas"]
+	path = yanao-rental-schemas
+	url = https://github.com/LookFor-Inc/yanao-rental-schemas.git
