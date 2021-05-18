@@ -1,10 +1,14 @@
 package com.lookfor.yanaorental.models;
 
 import com.lookfor.yanaorental.models.equipment.Equipment;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "rentals")
 public class Rental {
