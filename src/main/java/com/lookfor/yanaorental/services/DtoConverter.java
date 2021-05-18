@@ -3,6 +3,9 @@ package com.lookfor.yanaorental.services;
 import com.lookfor.json.schemas.generated.equipment_category.EquipmentCategoryGetAllResponse;
 import com.lookfor.json.schemas.generated.equipment_category.EquipmentCategoryItemV1;
 import com.lookfor.json.schemas.generated.equipment_category.EquipmentTypeItemV1;
+import com.lookfor.json.schemas.generated.rental.RentalGetAllByEquipmentTypeResponse;
+import com.lookfor.json.schemas.generated.rental.RentalItemV1;
+import com.lookfor.yanaorental.models.Rental;
 import com.lookfor.yanaorental.models.equipment.EquipmentCategory;
 import com.lookfor.yanaorental.models.equipment.EquipmentType;
 import lombok.extern.slf4j.Slf4j;
@@ -41,6 +44,24 @@ public class DtoConverter {
                         EquipmentCategoryItemV1::getName))
                 .collect(Collectors.toList());
         response.setCategories(categories);
+        return response;
+    }
+
+    public RentalGetAllByEquipmentTypeResponse toRentalGetAllByEquipmentTypeResponse(List<Rental> rentals) {
+        RentalGetAllByEquipmentTypeResponse response = new RentalGetAllByEquipmentTypeResponse();
+        List<RentalItemV1> rentalList = rentals
+                .stream()
+                .map(r -> {
+                    RentalItemV1 item = new RentalItemV1();
+                    item.setId(r.getId());
+                    item.setName(r.getName());
+                    item.setTown(r.getTown());
+                    return item;
+                })
+                .sorted(Comparator.comparing(
+                        RentalItemV1::getTown))
+                .collect(Collectors.toList());
+        response.setRentals(rentalList);
         return response;
     }
 }
