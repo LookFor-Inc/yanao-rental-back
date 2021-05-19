@@ -19,7 +19,7 @@ public class Rental {
     @Column(nullable = false, length = 128)
     private String name;
 
-    @Column(nullable = false, length = 128)
+    @Column(nullable = false)
     private String town;
 
     @OneToMany(mappedBy = "rental", cascade = CascadeType.ALL, orphanRemoval = true)

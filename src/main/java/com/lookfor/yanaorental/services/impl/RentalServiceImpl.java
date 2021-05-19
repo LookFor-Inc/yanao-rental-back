@@ -18,10 +18,10 @@ public class RentalServiceImpl implements RentalService {
 
     @Override
     @Transactional(readOnly = true)
-    public <T> T fetchAllByEquipmentType(long equipmentTypeId, Function<List<Rental>, T> toDto) {
-        List<Rental> rentals = rentalRepository.findAllByEquipmentTypeId(equipmentTypeId);
+    public <T> T fetchAllByEquipmentTypeIds(List<Long> equipmentTypeIds, Function<List<Rental>, T> toDto) {
+        List<Rental> rentals = rentalRepository.findByEquipmentTypeIds(equipmentTypeIds);
         if (rentals.isEmpty()) {
-            throw new NotFoundException("Equipment type with id " + equipmentTypeId + " was not found");
+            throw new NotFoundException("No rentals found by equipment type ids");
         }
         return toDto.apply(rentals);
     }

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/rental")
 @RequiredArgsConstructor
@@ -21,9 +23,11 @@ public class RentalController {
     private final DtoConverter dtoConverter;
 
     @GetMapping("/all-by-type")
-    public RentalGetAllByEquipmentTypeResponse takeAllRentalsByEquipmentType(@RequestParam long equipmentTypeId) {
+    public RentalGetAllByEquipmentTypeResponse takeAllRentalsByEquipmentType(@RequestParam Long[] equipmentTypeIds) {
         try {
-            return rentalService.fetchAllByEquipmentType(equipmentTypeId, dtoConverter::toRentalGetAllByEquipmentTypeResponse);
+            return rentalService.fetchAllByEquipmentTypeIds(
+                    List.of(equipmentTypeIds),
+                    dtoConverter::toRentalGetAllByEquipmentTypeResponse);
         } catch (NotFoundException exc) {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, exc.getMessage(), exc);
