@@ -16,7 +16,6 @@ import javax.validation.Valid;
 import java.io.IOException;
 
 @Validated
-@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/user")
 @SecurityRequirement(name = "bearerAuth")
