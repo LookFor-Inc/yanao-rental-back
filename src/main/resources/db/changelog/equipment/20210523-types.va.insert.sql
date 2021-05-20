@@ -12,5 +12,6 @@ VALUES ('Велосипед взрослый', (SELECT id FROM equipment_categor
        ('Самокат детский', (SELECT id FROM equipment_categories WHERE "name" = 'Самокаты')),
        ('Самокат электрический', (SELECT id FROM equipment_categories WHERE "name" = 'Самокаты')),
        ('Ролики взрослые', (SELECT id FROM equipment_categories WHERE "name" = 'Ролики')),
-       ('Ролики детские', (SELECT id FROM equipment_categories WHERE "name" = 'Ролики'))
+       ('Ролики детские', (SELECT id FROM equipment_categories WHERE "name" = 'Ролики')),
+       ('Ролики скороезды', (SELECT id FROM equipment_categories WHERE "name" = 'Ролики'))
 ;

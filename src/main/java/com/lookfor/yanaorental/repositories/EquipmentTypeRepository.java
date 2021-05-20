@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface EquipmentTypeRepository extends JpaRepository<EquipmentType, Long> {
     @Query(value = """
-            SELECT et FROM equipment_types et
+            SELECT * FROM equipment_types et
             INNER JOIN equipments e ON e.type_id = et.id
             WHERE e.rental_id = :rentalId
             """,

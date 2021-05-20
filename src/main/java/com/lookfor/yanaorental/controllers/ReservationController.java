@@ -33,4 +33,13 @@ public class ReservationController {
         );
     }
 
+    @GetMapping("/equipment-types-and-rentals/by-rental")
+    public ReservationGetEquipmentTypesAndRentalsResponse takeEquipmentTypesAndRentalByEquipmentTypes(
+            @RequestParam long rentalId
+    ) {
+        return reservationFacade.fetchEquipmentTypesAndRentalByRental(
+                rentalId,
+                ReservationGetEquipmentTypesAndRentalsResponse::new
+        );
+    }
 }
