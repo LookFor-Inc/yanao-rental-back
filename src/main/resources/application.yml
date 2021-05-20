@@ -1,5 +1,7 @@
 server:
   port: 8080
+  error:
+    include-message: always
 
 spring:
   datasource:
@@ -13,3 +15,53 @@ spring:
       ddl-auto: update
   liquibase:
     change-log: classpath:/db/changelog/db.changelog-master.xml
+  mail:
+    host: ${SPRING_MAIL_HOST}
+    username: ${SPRING_MAIL_USERNAME}
+    password: ${SPRING_MAIL_PASSWORD}
+    protocol: ${SPRING_MAIL_PROTOCOL}
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${SPRING_SECURITY_OAUTH2_GOOGLE_CLIENT_ID}
+            client-secret: ${SPRING_SECURITY_OAUTH2_GOOGLE_CLIENT_SECRET}
+            redirect-uri: "{baseUrl}/api/oauth2/callback/{registrationId}"
+            scope:
+              - email
+              - profile
+          vk:
+            client-id: ${SPRING_SECURITY_OAUTH2_VK_CLIENT_ID}
+            client-secret: ${SPRING_SECURITY_OAUTH2_VK_CLIENT_SECRET}
+            redirect-uri: "{baseUrl}/api/oauth2/callback/{registrationId}"
+            token-name: code
+            authentication-scheme: query
+            client-authentication-scheme: form
+            client-authentication-method: post
+            authorization-grant-type: authorization_code
+            user-name-attribute: user_id
+            scope:
+              - email
+        provider:
+          vk:
+            authorization-uri: https://oauth.vk.com/authorize?v=5.130
+            token-uri: https://oauth.vk.com/access_token
+            user-info-uri: https://api.vk.com/method/users.get?{user_id}&v=5.130&fields=photo_max&display=popup&lang=ru
+            user-name-attribute: response
+            user-info-authentication-method: form
+
+app:
+  host: ${APP_HOST}
+  front: ${APP_FRONT}
+  auth:
+    jwt-token-secret: ${APP_AUTH_JWT_TOKEN_SECRET}
+    jwt-token-expiration: 864000000
+    cookie:
+      name: COOKIE-BEARER
+      secure: false # True only with https
+  oauth2:
+    authorized-redirect-urls:
+      - http://localhost:3000
+      - http://localhost:3000/auth/oauth2/callback
+

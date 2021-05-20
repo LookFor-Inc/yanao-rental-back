@@ -3,5 +3,16 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
-
+    <!-- Create & insert RENTALS -->
+    <include file="classpath:/db/changelog/rental/20210523-rentals.va.create.sql"/>
+    <include file="classpath:/db/changelog/rental/20210523-rentals.va.insert.sql"/>
+    <!-- Create & insert EQUIPMENT CATEGORIES -->
+    <include file="classpath:/db/changelog/equipment/20210523-categories.va.create.sql"/>
+    <include file="classpath:/db/changelog/equipment/20210523-categories.va.insert.sql"/>
+    <!-- Create & insert EQUIPMENT TYPES -->
+    <include file="classpath:/db/changelog/equipment/20210523-types.va.create.sql"/>
+    <include file="classpath:/db/changelog/equipment/20210523-types.va.insert.sql"/>
+    <!-- Create & insert EQUIPMENTS -->
+    <include file="classpath:/db/changelog/equipment/20210523-equipments.va.create.sql"/>
+    <include file="classpath:/db/changelog/equipment/20210523-equipments.va.insert.sql"/>
 </databaseChangeLog>
