@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.function.Function;
 
 @Service
 @RequiredArgsConstructor
@@ -17,8 +16,7 @@ public class EquipmentCategoryServiceImpl implements EquipmentCategoryService {
 
     @Override
     @Transactional(readOnly = true)
-    public <T> T fetchAll(Function<List<EquipmentCategory>, T> toDto) {
-        List<EquipmentCategory> equipmentCategories = equipmentCategoryRepository.findAll();
-        return toDto.apply(equipmentCategories);
+    public List<EquipmentCategory> fetchAll() {
+        return equipmentCategoryRepository.findAll();
     }
 }
