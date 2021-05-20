@@ -1,6 +1,6 @@
 package com.lookfor.yanaorental.controllers;
 
-import com.lookfor.json.schemas.generated.rental.RentalGetAllByEquipmentTypeResponse;
+import com.lookfor.json.schemas.generated.rental.RentalGetAllResponse;
 import com.lookfor.yanaorental.exceptions.NotFoundException;
 import com.lookfor.yanaorental.services.DtoConverter;
 import com.lookfor.yanaorental.services.RentalService;
@@ -23,14 +23,19 @@ public class RentalController {
     private final DtoConverter dtoConverter;
 
     @GetMapping("/all-by-type")
-    public RentalGetAllByEquipmentTypeResponse takeAllRentalsByEquipmentType(@RequestParam Long[] equipmentTypeIds) {
+    public RentalGetAllResponse takeAllRentalsByEquipmentType(@RequestParam Long[] equipmentTypeIds) {
         try {
             return rentalService.fetchAllByEquipmentTypeIds(
                     List.of(equipmentTypeIds),
-                    dtoConverter::toRentalGetAllByEquipmentTypeResponse);
+                    dtoConverter::toRentalGetAllResponse);
         } catch (NotFoundException exc) {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, exc.getMessage(), exc);
         }
+    }
+
+    @GetMapping("/all")
+    public RentalGetAllResponse takeAllRentals() {
+        return rentalService.fetchAll(dtoConverter::toRentalGetAllResponse);
     }
 }

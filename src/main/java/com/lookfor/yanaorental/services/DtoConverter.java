@@ -3,7 +3,7 @@ package com.lookfor.yanaorental.services;
 import com.lookfor.json.schemas.generated.equipment_category.EquipmentCategoryGetAllResponse;
 import com.lookfor.json.schemas.generated.equipment_category.EquipmentCategoryItemV1;
 import com.lookfor.json.schemas.generated.equipment_category.EquipmentTypeItemV1;
-import com.lookfor.json.schemas.generated.rental.RentalGetAllByEquipmentTypeResponse;
+import com.lookfor.json.schemas.generated.rental.RentalGetAllResponse;
 import com.lookfor.json.schemas.generated.rental.RentalItemV1;
 import com.lookfor.yanaorental.models.Rental;
 import com.lookfor.yanaorental.models.equipment.EquipmentCategory;
@@ -47,19 +47,19 @@ public class DtoConverter {
         return response;
     }
 
-    public RentalGetAllByEquipmentTypeResponse toRentalGetAllByEquipmentTypeResponse(List<Rental> rentals) {
-        RentalGetAllByEquipmentTypeResponse response = new RentalGetAllByEquipmentTypeResponse();
+    public RentalGetAllResponse toRentalGetAllResponse(List<Rental> rentals) {
+        RentalGetAllResponse response = new RentalGetAllResponse();
         List<RentalItemV1> rentalList = rentals
                 .stream()
                 .map(r -> {
                     RentalItemV1 item = new RentalItemV1();
                     item.setId(r.getId());
                     item.setName(r.getName());
-                    item.setTown(r.getTown());
+                    item.setAddress(r.getAddress());
                     return item;
                 })
                 .sorted(Comparator.comparing(
-                        RentalItemV1::getTown))
+                        RentalItemV1::getAddress))
                 .collect(Collectors.toList());
         response.setRentals(rentalList);
         return response;

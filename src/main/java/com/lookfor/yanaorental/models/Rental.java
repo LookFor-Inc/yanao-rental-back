@@ -20,7 +20,7 @@ public class Rental {
     private String name;
 
     @Column(nullable = false)
-    private String town;
+    private String address;
 
     @OneToMany(mappedBy = "rental", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Equipment> equipments;

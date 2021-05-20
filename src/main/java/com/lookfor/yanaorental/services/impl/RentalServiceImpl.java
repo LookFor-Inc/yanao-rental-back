@@ -25,4 +25,11 @@ public class RentalServiceImpl implements RentalService {
         }
         return toDto.apply(rentals);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public <T> T fetchAll(Function<List<Rental>, T> toDto) {
+        List<Rental> rentals = rentalRepository.findAll();
+        return toDto.apply(rentals);
+    }
 }
