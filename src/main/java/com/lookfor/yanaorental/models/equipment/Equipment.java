@@ -18,12 +18,6 @@ public class Equipment {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private EquipmentType type;
 
-    @Column(nullable = false)
-    private Integer totalAmount = 0;
-
-    @Column(nullable = false)
-    private Integer activeAmount = 0;
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Rental rental;
 }
