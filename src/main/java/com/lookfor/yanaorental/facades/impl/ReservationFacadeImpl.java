@@ -12,18 +12,14 @@ import com.lookfor.yanaorental.services.EquipmentCategoryService;
 import com.lookfor.yanaorental.services.EquipmentTypeService;
 import com.lookfor.yanaorental.services.RentalService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-@Slf4j
 @Component
 @RequiredArgsConstructor
 public class ReservationFacadeImpl implements ReservationFacade {
@@ -85,11 +81,7 @@ public class ReservationFacadeImpl implements ReservationFacade {
                             EquipmentCategoryItemV1 ecItem = new EquipmentCategoryItemV1();
                             ecItem.setId(ec.getId());
                             ecItem.setName(ec.getName());
-                            try {
-                                ecItem.setImg(new URL("http://localhost:8080"));
-                            } catch (MalformedURLException exc) {
-                                log.error(exc.getMessage());
-                            }
+                            ecItem.setImg(ec.getImg());
 
                             List<EquipmentTypeItemV1> equipmentTypeItemList =
                                     ec.getTypes()
@@ -98,6 +90,7 @@ public class ReservationFacadeImpl implements ReservationFacade {
                                                 EquipmentTypeItemV1 etItem = new EquipmentTypeItemV1();
                                                 etItem.setId(et.getId());
                                                 etItem.setName(et.getName());
+                                                etItem.setImg(et.getImg());
                                                 if (!byEquipmentCategory.containsKey(ec)) {
                                                     ecItem.setAvailable(false);
                                                     etItem.setAvailable(false);

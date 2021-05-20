@@ -6,16 +6,12 @@ import com.lookfor.json.schemas.generated.rental.RentalItemV1;
 import com.lookfor.yanaorental.models.Rental;
 import com.lookfor.yanaorental.models.equipment.EquipmentCategory;
 import com.lookfor.yanaorental.models.equipment.EquipmentType;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Slf4j
 @Component
 public class DtoConverter {
     public List<EquipmentTypeItemV1> toEquipmentTypeItemList(List<EquipmentType> equipmentTypes) {
@@ -25,6 +21,7 @@ public class DtoConverter {
                     EquipmentTypeItemV1 item = new EquipmentTypeItemV1();
                     item.setId(et.getId());
                     item.setName(et.getName());
+                    item.setImg(et.getImg());
                     return item;
                 })
                 .collect(Collectors.toList());
@@ -37,11 +34,7 @@ public class DtoConverter {
                     EquipmentCategoryItemV1 item = new EquipmentCategoryItemV1();
                     item.setId(ec.getId());
                     item.setName(ec.getName());
-                    try {
-                        item.setImg(new URL("http://localhost:8080"));
-                    } catch (MalformedURLException exc) {
-                        log.error(exc.getMessage());
-                    }
+                    item.setImg(ec.getImg());
                     item.setTypes(toEquipmentTypeItemList(ec.getTypes()));
                     return item;
                 })
