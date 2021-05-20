@@ -1,0 +1,8 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "title": "Login response",
+  "type": "object",
+  "extends": {
+    "$ref": "../../yanao-rental-schemas/json.schemas/auth/auth-login-response-v1.json"
+  }
+}

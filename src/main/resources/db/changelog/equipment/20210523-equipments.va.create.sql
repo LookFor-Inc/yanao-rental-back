@@ -4,8 +4,6 @@
 
 CREATE TABLE equipments (
     id            BIGSERIAL NOT NULL,
-    active_amount INT8 NOT NULL,
-    total_amount  INT8 NOT NULL,
     type_id       BIGSERIAL NOT NULL,
     rental_id     BIGSERIAL NOT NULL,
     CONSTRAINT equipments_pkey PRIMARY KEY (id),

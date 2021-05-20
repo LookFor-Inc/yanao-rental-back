@@ -2,7 +2,7 @@
 
 --changeset akimov-ve:rentals_create
 
-INSERT INTO rentals ("name", town)
+INSERT INTO rentals ("name", address)
 VALUES ('Мотосалон STELS', 'Салехард'),
        ('Магазин "Идрис"', 'Салехард'),
        ('Мир спорта 24', 'Салехард'),

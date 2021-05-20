@@ -29,7 +29,6 @@ public class Payment {
     @JoinColumn(name = "coupon_id")
     private Coupon coupon;
 
-    @Column(nullable = false)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private User user;
 
