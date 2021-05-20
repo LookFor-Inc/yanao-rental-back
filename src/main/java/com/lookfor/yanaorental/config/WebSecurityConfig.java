@@ -139,7 +139,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/images/**",
                         "/auth/api/v1/**",
                         "/api/oauth2/**",
-                        "/user/check-*"
+                        "/user/check-*",
+                        "/api/v1/reservation/equipment-types-and-rentals",
+                        "/api/v1/reservation/equipment-types-and-rentals/by-equipment-types",
+                        "/api/v1/reservation/equipment-types-and-rentals/by-rental"
                 ).permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()

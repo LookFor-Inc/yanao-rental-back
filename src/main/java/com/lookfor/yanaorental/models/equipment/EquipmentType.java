@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.net.URL;
 import java.util.List;
 
 @Getter
@@ -18,7 +19,11 @@ public class EquipmentType {
     @Column(nullable = false, length = 128, unique = true)
     private String name;
 
-    @ManyToOne(optional = false)
+    @Column(length = 128, nullable = false)
+    private URL img;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
     private EquipmentCategory category;
 
     @OneToMany(mappedBy = "type")

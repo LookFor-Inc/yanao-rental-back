@@ -22,6 +22,7 @@ import java.io.IOException;
 public class UserController {
     @Autowired
     private UserService userService;
+
     @Autowired
     private UserDtoConverter dtoConverter;
 

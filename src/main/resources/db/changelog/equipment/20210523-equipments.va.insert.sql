@@ -14,7 +14,6 @@ VALUES ((SELECT id FROM equipment_types WHERE "name" = 'Велосипед вз�
        ((SELECT id FROM equipment_types WHERE "name" = 'Велосипед детский'), (SELECT id FROM rentals WHERE "name" = 'Мир спорта 24')),
        ((SELECT id FROM equipment_types WHERE "name" = 'Велосипед шоссейный'), (SELECT id FROM rentals WHERE "name" = 'Мир спорта 24')),
        ((SELECT id FROM equipment_types WHERE "name" = 'Велосипед горный'), (SELECT id FROM rentals WHERE "name" = 'Мир спорта 24')),
-       ((SELECT id FROM equipment_types WHERE "name" = 'Велосипед электрический'), (SELECT id FROM rentals WHERE "name" = 'Мир спорта 24')),
        ((SELECT id FROM equipment_types WHERE "name" = 'Самокат взрослый'), (SELECT id FROM rentals WHERE "name" = 'Мир спорта 24')),
        ((SELECT id FROM equipment_types WHERE "name" = 'Самокат детский'), (SELECT id FROM rentals WHERE "name" = 'Мир спорта 24')),
        ((SELECT id FROM equipment_types WHERE "name" = 'Самокат электрический'), (SELECT id FROM rentals WHERE "name" = 'Мир спорта 24')),
