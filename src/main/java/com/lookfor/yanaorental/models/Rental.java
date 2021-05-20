@@ -19,9 +19,12 @@ public class Rental {
     @Column(nullable = false, length = 128)
     private String name;
 
-    @Column(nullable = false, length = 128)
-    private String town;
+    @Column(nullable = false, length = 512)
+    private String address;
 
     @OneToMany(mappedBy = "rental", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Equipment> equipments;
+
+    @OneToMany(mappedBy = "rental")
+    private List<Reservation> reservations;
 }

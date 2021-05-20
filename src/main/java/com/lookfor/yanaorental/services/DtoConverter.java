@@ -55,7 +55,7 @@ public class DtoConverter {
                     RentalItemV1 item = new RentalItemV1();
                     item.setId(r.getId());
                     item.setName(r.getName());
-                    item.setTown(r.getTown());
+                    item.setTown(r.getAddress());
                     return item;
                 })
                 .sorted(Comparator.comparing(

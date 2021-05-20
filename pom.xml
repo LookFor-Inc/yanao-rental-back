@@ -93,6 +93,7 @@
                     <removeOldOutput>true</removeOldOutput>
                     <generateBuilders>true</generateBuilders>
                     <includeJsr303Annotations>true</includeJsr303Annotations>
+                    <includeConstructors>true</includeConstructors>
                 </configuration>
                 <executions>
                     <execution>
