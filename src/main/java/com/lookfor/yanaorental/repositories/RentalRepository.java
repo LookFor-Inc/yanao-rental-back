@@ -17,10 +17,10 @@ public interface RentalRepository extends JpaRepository<Rental, Long> {
                     INNER JOIN equipments e ON r2.id = e.rental_id
                     WHERE e.type_id IN :ids
                     GROUP BY r2.id
-                    HAVING COUNT(DISTINCT e.type_id) = :colLength)
+                    HAVING COUNT(DISTINCT e.type_id) = :srcSize)
                     """,
             nativeQuery = true)
-    List<Rental> findByEquipmentTypeIdsWithLength(List<Long> ids, int colLength);
+    List<Rental> findByEquipmentTypeIdsWithLength(List<Long> ids, int srcSize);
 
     default List<Rental> findByEquipmentTypeIds(List<Long> ids) {
         return findByEquipmentTypeIdsWithLength(ids, ids.size());

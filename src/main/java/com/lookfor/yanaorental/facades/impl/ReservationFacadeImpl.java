@@ -24,10 +24,26 @@ public class ReservationFacadeImpl implements ReservationFacade {
 
     @Override
     @Transactional(readOnly = true)
-    public <T extends ReservationEquipmentTypesAndRentalsV1> T fetchEquipmentTypesAndRentals(Supplier<T> responseCreator) {
+    public <T extends ReservationEquipmentTypesAndRentalsV1> T fetchEquipmentTypesAndRentals(
+            Supplier<T> responseCreator
+    ) {
         T response = responseCreator.get();
         List<EquipmentCategory> equipmentCategories = equipmentCategoryService.fetchAll();
         List<Rental> rentals = rentalService.fetchAll();
+        response.setEquipmentCategories(dtoConverter.toEquipmentCategoryItemList(equipmentCategories));
+        response.setRentals(dtoConverter.toRentalItemList(rentals));
+        return response;
+    }
+
+    @Override
+    @Transactional
+    public <T extends ReservationEquipmentTypesAndRentalsV1> T fetchEquipmentTypesAndRentalsByEquipmentTypes(
+            List<Long> equipmentTypeIds,
+            Supplier<T> responseCreator
+    ) {
+        T response = responseCreator.get();
+        List<EquipmentCategory> equipmentCategories = equipmentCategoryService.fetchAll();
+        List<Rental> rentals = rentalService.fetchByEquipmentTypeIds(equipmentTypeIds);
         response.setEquipmentCategories(dtoConverter.toEquipmentCategoryItemList(equipmentCategories));
         response.setRentals(dtoConverter.toRentalItemList(rentals));
         return response;

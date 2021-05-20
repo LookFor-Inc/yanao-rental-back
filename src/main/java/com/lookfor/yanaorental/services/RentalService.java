@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface RentalService {
     List<Rental> fetchAll();
+
+    List<Rental> fetchByEquipmentTypeIds(List<Long> equipmentTypeIds);
 }

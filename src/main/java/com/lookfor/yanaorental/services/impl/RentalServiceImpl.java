@@ -19,4 +19,10 @@ public class RentalServiceImpl implements RentalService {
     public List<Rental> fetchAll() {
         return rentalRepository.findAll();
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Rental> fetchByEquipmentTypeIds(List<Long> equipmentTypeIds) {
+        return rentalRepository.findByEquipmentTypeIds(equipmentTypeIds);
+    }
 }

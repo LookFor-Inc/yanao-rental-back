@@ -5,7 +5,10 @@ import com.lookfor.yanaorental.facades.ReservationFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/reservation")
@@ -14,7 +17,20 @@ public class ReservationController {
     private final ReservationFacade reservationFacade;
 
     @GetMapping("/equipment-types-and-rentals")
-    public ReservationGetEquipmentTypesAndRentalsResponse takeEquipmentTypesWithRentals() {
-        return reservationFacade.fetchEquipmentTypesAndRentals(ReservationGetEquipmentTypesAndRentalsResponse::new);
+    public ReservationGetEquipmentTypesAndRentalsResponse takeEquipmentTypesAndRentals() {
+        return reservationFacade.fetchEquipmentTypesAndRentals(
+                ReservationGetEquipmentTypesAndRentalsResponse::new
+        );
     }
+
+    @GetMapping("/equipment-types-and-rentals/by-equipment-types")
+    public ReservationGetEquipmentTypesAndRentalsResponse takeEquipmentTypesAndRentalsByEquipmentTypes(
+            @RequestParam Long[] equipmentTypeIds
+    ) {
+        return reservationFacade.fetchEquipmentTypesAndRentalsByEquipmentTypes(
+                List.of(equipmentTypeIds),
+                ReservationGetEquipmentTypesAndRentalsResponse::new
+        );
+    }
+
 }
