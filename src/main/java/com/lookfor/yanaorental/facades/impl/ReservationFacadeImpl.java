@@ -3,6 +3,7 @@ package com.lookfor.yanaorental.facades.impl;
 import com.lookfor.json.schemas.generated.equipment_category.EquipmentCategoryItemV1;
 import com.lookfor.json.schemas.generated.equipment_category.EquipmentTypeItemV1;
 import com.lookfor.json.schemas.generated.reservation.ReservationEquipmentTypesAndRentalsV1;
+import com.lookfor.yanaorental.annotations.TransactionReadOnly;
 import com.lookfor.yanaorental.facades.ReservationFacade;
 import com.lookfor.yanaorental.models.Rental;
 import com.lookfor.yanaorental.models.equipment.EquipmentCategory;
@@ -13,7 +14,6 @@ import com.lookfor.yanaorental.services.EquipmentTypeService;
 import com.lookfor.yanaorental.services.RentalService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -30,7 +30,7 @@ public class ReservationFacadeImpl implements ReservationFacade {
     private final DtoConverter dtoConverter;
 
     @Override
-    @Transactional(readOnly = true)
+    @TransactionReadOnly
     public <T extends ReservationEquipmentTypesAndRentalsV1> T fetchEquipmentTypesAndRentals(
             Supplier<T> responseCreator
     ) {
@@ -45,7 +45,7 @@ public class ReservationFacadeImpl implements ReservationFacade {
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @TransactionReadOnly
     public <T extends ReservationEquipmentTypesAndRentalsV1> T fetchEquipmentTypesAndRentalsByEquipmentTypes(
             List<Long> equipmentTypeIds,
             Supplier<T> responseCreator
@@ -61,7 +61,7 @@ public class ReservationFacadeImpl implements ReservationFacade {
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @TransactionReadOnly
     public <T extends ReservationEquipmentTypesAndRentalsV1> T fetchEquipmentTypesAndRentalByRental(
             long rentalId,
             Supplier<T> responseCreator

@@ -1,0 +1,8 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "title": "Registration request",
+  "type": "object",
+  "extends": {
+    "$ref": "../../yanao-rental-schemas/json.schemas/auth/auth-registration-request-v1.json"
+  }
+}

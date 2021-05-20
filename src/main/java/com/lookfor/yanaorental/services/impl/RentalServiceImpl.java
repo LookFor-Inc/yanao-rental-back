@@ -1,11 +1,11 @@
 package com.lookfor.yanaorental.services.impl;
 
+import com.lookfor.yanaorental.annotations.TransactionReadOnly;
 import com.lookfor.yanaorental.models.Rental;
 import com.lookfor.yanaorental.repositories.RentalRepository;
 import com.lookfor.yanaorental.services.RentalService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,13 +15,13 @@ public class RentalServiceImpl implements RentalService {
     private final RentalRepository rentalRepository;
 
     @Override
-    @Transactional(readOnly = true)
+    @TransactionReadOnly
     public List<Rental> fetchAll() {
         return rentalRepository.findAll();
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @TransactionReadOnly
     public List<Rental> fetchByEquipmentTypeIds(List<Long> equipmentTypeIds) {
         return rentalRepository.findByEquipmentTypeIds(equipmentTypeIds);
     }
