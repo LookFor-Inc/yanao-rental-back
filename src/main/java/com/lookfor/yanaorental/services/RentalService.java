@@ -11,17 +11,17 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 public interface RentalService {
+    Rental fetchById(long id);
+
     List<Rental> fetchAll();
 
-    public <T> T fetchAll(Function<List<Rental>, T> toDto);
+    <T> T fetchAll(Function<List<Rental>, T> toDto);
 
     List<Rental> fetchByEquipmentTypeIds(List<Long> equipmentTypeIds);
 
     <T extends RentalItemV1> T save(RentalPublishRequest request, long userId, Supplier<T> responseCreator);
 
     <T extends RentalItemV1> T saveImage(MultipartFile img, long rentalId, Supplier<T> responseCreator) throws IOException;
-
-    Rental fetchById(long id);
 
     boolean isUserInRental(long rentalId, long userId);
 }

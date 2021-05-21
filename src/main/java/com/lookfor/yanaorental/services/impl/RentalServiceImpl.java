@@ -30,6 +30,13 @@ public class RentalServiceImpl implements RentalService {
 
     @Override
     @TransactionReadOnly
+    public Rental fetchById(long id) {
+        return rentalRepository.findById(id).orElseThrow(
+                () -> new NotFoundException("Rental with id " + id + " was not found"));
+    }
+
+    @Override
+    @TransactionReadOnly
     public List<Rental> fetchAll() {
         return rentalRepository.findAll();
     }
@@ -88,13 +95,6 @@ public class RentalServiceImpl implements RentalService {
         response.setAddress(rental.getAddress());
         response.setImg(rental.getImg());
         return response;
-    }
-
-    @Override
-    @TransactionReadOnly
-    public Rental fetchById(long id) {
-        return rentalRepository.findById(id).orElseThrow(
-                () -> new NotFoundException("Rental with id " + id + " was not found"));
     }
 
     @Override
