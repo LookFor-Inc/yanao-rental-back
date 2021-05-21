@@ -2,6 +2,7 @@ package com.lookfor.yanaorental.controllers;
 
 import com.lookfor.json.schemas.generated.rental.RentalPublishRequest;
 import com.lookfor.json.schemas.generated.rental.RentalPublishResponse;
+import com.lookfor.yanaorental.annotations.CurrentUserId;
 import com.lookfor.yanaorental.services.RentalService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -18,9 +19,11 @@ public class RentalController {
     private final RentalService rentalService;
 
     @PostMapping
-    public RentalPublishResponse publish(@RequestBody @Valid RentalPublishRequest request) {
-        // TODO: add user
-        return rentalService.save(request, RentalPublishResponse::new);
+    public RentalPublishResponse publish(
+            @RequestBody @Valid RentalPublishRequest request,
+            @CurrentUserId Long userId
+    ) {
+        return rentalService.save(request, userId, RentalPublishResponse::new);
     }
 
     @PostMapping(

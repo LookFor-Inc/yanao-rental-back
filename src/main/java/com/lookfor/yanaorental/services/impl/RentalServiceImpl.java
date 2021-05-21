@@ -6,8 +6,10 @@ import com.lookfor.yanaorental.annotations.TransactionReadOnly;
 import com.lookfor.yanaorental.annotations.TransactionRequired;
 import com.lookfor.yanaorental.exceptions.rest.NotFoundException;
 import com.lookfor.yanaorental.models.Rental;
+import com.lookfor.yanaorental.models.user.User;
 import com.lookfor.yanaorental.repositories.RentalRepository;
 import com.lookfor.yanaorental.services.RentalService;
+import com.lookfor.yanaorental.services.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,6 +25,8 @@ import java.util.function.Supplier;
 @RequiredArgsConstructor
 public class RentalServiceImpl implements RentalService {
     private final RentalRepository rentalRepository;
+
+    private final UserService userService;
 
     @Override
     @TransactionReadOnly
@@ -40,15 +44,17 @@ public class RentalServiceImpl implements RentalService {
     @TransactionRequired
     public <T extends RentalItemV1> T save(
             RentalPublishRequest request,
+            long userId,
             Supplier<T> responseCreator
     ) {
         T response = responseCreator.get();
-        String name = request.getName();
-        String address = request.getAddress();
+
+        User user = userService.fetchById(userId);
 
         Rental rental = new Rental();
-        rental.setName(name);
-        rental.setAddress(address);
+        rental.setName(request.getName());
+        rental.setAddress(request.getAddress());
+        rental.setOwner(user);
         rentalRepository.save(rental);
 
         response.setId(rental.getId());

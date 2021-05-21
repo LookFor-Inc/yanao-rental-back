@@ -1,6 +1,7 @@
 package com.lookfor.yanaorental.models;
 
 import com.lookfor.yanaorental.models.equipment.Equipment;
+import com.lookfor.yanaorental.models.user.User;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,6 +32,10 @@ public class Rental {
 
     @Column
     private Double longitude;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner_id", nullable = false)
+    private User owner;
 
     @OneToMany(mappedBy = "rental", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Equipment> equipments;
