@@ -26,7 +26,7 @@ import java.util.function.Supplier;
 @RequiredArgsConstructor
 public class RentalServiceImpl implements RentalService {
     private final RentalRepository rentalRepository;
-
+    private final LocalImageService imageService;
     private final UserRepository userRepository;
 
     @Override
@@ -73,15 +73,10 @@ public class RentalServiceImpl implements RentalService {
             Supplier<T> responseCreator
     ) throws IOException {
         T response = responseCreator.get();
-        File imgFile = new File(
-                "src/main/resources/static/images/upload/" + img.getOriginalFilename());
-        FileOutputStream fos = new FileOutputStream(imgFile);
-
-        fos.write(img.getBytes());
-        fos.close();
+        URL imageUrl = imageService.save(img);
 
         Rental rental = fetchById(rentalId);
-        rental.setImg(new URL(String.format("http://localhost:8080/images/upload/%s", imgFile.getName())));
+        rental.setImg(imageUrl);
 
         response.setId(rental.getId());
         response.setName(rental.getName());

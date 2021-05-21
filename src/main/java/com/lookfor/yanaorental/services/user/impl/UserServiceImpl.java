@@ -23,6 +23,7 @@ import com.lookfor.yanaorental.models.user.UserType;
 import com.lookfor.yanaorental.repositories.UserRepository;
 import com.lookfor.yanaorental.security.oauth2.user.OAuth2UserInfo;
 import com.lookfor.yanaorental.services.AvatarService;
+import com.lookfor.yanaorental.services.ImageService;
 import com.lookfor.yanaorental.services.auth.EmailVerificationTokenService;
 import com.lookfor.yanaorental.services.auth.PasswordResetTokenService;
 import com.lookfor.yanaorental.services.user.UserDtoConverter;
@@ -37,6 +38,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.function.Function;
 
@@ -49,6 +51,7 @@ public class UserServiceImpl implements UserService {
     private final AuthenticationManager authenticationManager;
     private final PasswordResetTokenService passwordResetTokenService;
     private final EmailVerificationTokenService emailVerificationTokenService;
+    private final ImageService imageService;
 
     private final UserDtoConverter dtoConverter;
     private final PasswordEncoder passwordEncoder;
@@ -178,7 +181,8 @@ public class UserServiceImpl implements UserService {
     @TransactionRequired
     public UserAvatarUpdateResponse updateAvatar(long userId, MultipartFile avatar) {
         User user = fetchById(userId);
-        // TODO: сохранение в mongoDb
+        URL newAvatarUrl = imageService.save(avatar);
+        user.getUserInfo().setAvatar(newAvatarUrl);
         return dtoConverter.convertToUserAvatarUpdate(user);
     }
 
