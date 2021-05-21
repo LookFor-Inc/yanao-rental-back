@@ -23,7 +23,7 @@ public class Rental {
     @Column(nullable = false, length = 512)
     private String address;
 
-    @Column(length = 128, nullable = false)
+    @Column(length = 128)
     private URL img;
 
     @Column
