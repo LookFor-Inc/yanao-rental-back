@@ -1,9 +1,9 @@
 package com.lookfor.yanaorental.exceptions.rest;
 
-public class UnauthorizedException extends RuntimeException {
+public class UserIsNotInRentalException extends RuntimeException {
     static final long serialVersionUID = 1L;
 
-    public UnauthorizedException(String message) {
+    public UserIsNotInRentalException(String message) {
         super(message);
     }
 }

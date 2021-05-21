@@ -17,4 +17,8 @@ public interface RentalService {
     <T extends RentalItemV1> T save(RentalPublishRequest request, long userId, Supplier<T> responseCreator);
 
     <T extends RentalItemV1> T saveImage(MultipartFile img, long rentalId, Supplier<T> responseCreator) throws IOException;
+
+    Rental fetchById(long id);
+
+    boolean isUserInRental(long rentalId, long userId);
 }

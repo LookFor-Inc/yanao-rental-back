@@ -2,9 +2,13 @@ package com.lookfor.yanaorental.controllers;
 
 import com.lookfor.json.schemas.generated.rental.RentalPublishRequest;
 import com.lookfor.json.schemas.generated.rental.RentalPublishResponse;
+import com.lookfor.yanaorental.annotations.AccessToRental;
 import com.lookfor.yanaorental.annotations.CurrentUserId;
 import com.lookfor.yanaorental.services.RentalService;
-import lombok.RequiredArgsConstructor;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -15,9 +19,11 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/v1/rental")
-@RequiredArgsConstructor
+@SecurityRequirement(name = "bearerAuth")
+@NoArgsConstructor
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class RentalController {
-    private final RentalService rentalService;
+    private RentalService rentalService;
 
     @PostMapping
     @PreAuthorize("hasRole('LANDLORD')")
@@ -28,6 +34,7 @@ public class RentalController {
         return rentalService.save(request, userId, RentalPublishResponse::new);
     }
 
+    @AccessToRental(rentalId = "rentalId")
     @PostMapping(
             value = "/img",
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE)

@@ -5,11 +5,12 @@ import com.lookfor.json.schemas.generated.rental.RentalPublishRequest;
 import com.lookfor.yanaorental.annotations.TransactionReadOnly;
 import com.lookfor.yanaorental.annotations.TransactionRequired;
 import com.lookfor.yanaorental.exceptions.rest.NotFoundException;
+import com.lookfor.yanaorental.exceptions.rest.UserIsNotInRentalException;
 import com.lookfor.yanaorental.models.Rental;
 import com.lookfor.yanaorental.models.user.User;
 import com.lookfor.yanaorental.repositories.RentalRepository;
+import com.lookfor.yanaorental.repositories.UserRepository;
 import com.lookfor.yanaorental.services.RentalService;
-import com.lookfor.yanaorental.services.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,7 +27,7 @@ import java.util.function.Supplier;
 public class RentalServiceImpl implements RentalService {
     private final RentalRepository rentalRepository;
 
-    private final UserService userService;
+    private final UserRepository userRepository;
 
     @Override
     @TransactionReadOnly
@@ -49,7 +50,8 @@ public class RentalServiceImpl implements RentalService {
     ) {
         T response = responseCreator.get();
 
-        User user = userService.fetchById(userId);
+        User user = userRepository.findById(userId).orElseThrow(
+                () -> new NotFoundException("User not found with id: " + userId));
 
         Rental rental = new Rental();
         rental.setName(request.getName());
@@ -78,7 +80,7 @@ public class RentalServiceImpl implements RentalService {
         fos.write(img.getBytes());
         fos.close();
 
-        Rental rental = fetchRentalById(rentalId);
+        Rental rental = fetchById(rentalId);
         rental.setImg(new URL(String.format("http://localhost:8080/images/upload/%s", imgFile.getName())));
 
         response.setId(rental.getId());
@@ -88,8 +90,20 @@ public class RentalServiceImpl implements RentalService {
         return response;
     }
 
-    private Rental fetchRentalById(long rentalId) {
-        return rentalRepository.findById(rentalId).orElseThrow(
-                () -> new NotFoundException("Rental with id " + rentalId + " was not found"));
+    @Override
+    @TransactionReadOnly
+    public Rental fetchById(long id) {
+        return rentalRepository.findById(id).orElseThrow(
+                () -> new NotFoundException("Rental with id " + id + " was not found"));
+    }
+
+    @Override
+    @TransactionReadOnly
+    public boolean isUserInRental(long rentalId, long userId) {
+        if (!rentalRepository.existsByIdAndOwnerId(rentalId, userId)) {
+            throw new UserIsNotInRentalException(
+                    "User with id " + userId + " is not in a rental with id " + rentalId);
+        }
+        return true;
     }
 }
