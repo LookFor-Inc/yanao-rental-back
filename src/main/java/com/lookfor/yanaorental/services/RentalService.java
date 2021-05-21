@@ -2,15 +2,18 @@ package com.lookfor.yanaorental.services;
 
 import com.lookfor.json.schemas.generated.rental.RentalItemV1;
 import com.lookfor.json.schemas.generated.rental.RentalPublishRequest;
-import com.lookfor.yanaorental.models.Rental;
+import com.lookfor.yanaorental.models.rental.Rental;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public interface RentalService {
     List<Rental> fetchAll();
+
+    public <T> T fetchAll(Function<List<Rental>, T> toDto);
 
     List<Rental> fetchByEquipmentTypeIds(List<Long> equipmentTypeIds);
 

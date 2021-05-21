@@ -18,7 +18,7 @@ public class ProviderAuth {
     @Enumerated(EnumType.STRING)
     private AuthProvider provider;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "user_id")
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 }

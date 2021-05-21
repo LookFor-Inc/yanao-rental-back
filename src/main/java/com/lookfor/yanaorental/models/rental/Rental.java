@@ -1,5 +1,6 @@
-package com.lookfor.yanaorental.models;
+package com.lookfor.yanaorental.models.rental;
 
+import com.lookfor.yanaorental.models.Reservation;
 import com.lookfor.yanaorental.models.equipment.Equipment;
 import com.lookfor.yanaorental.models.user.User;
 import lombok.Getter;
@@ -27,11 +28,14 @@ public class Rental {
     @Column(length = 128)
     private URL img;
 
-    @Column
+    @Column(nullable = false, precision = 6, scale = 2)
     private Double latitude;
 
-    @Column
+    @Column(nullable = false, precision = 6, scale = 2)
     private Double longitude;
+
+    @OneToMany(mappedBy = "rental", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<WorkTime> workTimes;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id", nullable = false)

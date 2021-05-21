@@ -1,7 +1,7 @@
 package com.lookfor.yanaorental.config.bpp;
 
 import com.lookfor.yanaorental.annotations.AccessToRental;
-import com.lookfor.yanaorental.models.Rental;
+import com.lookfor.yanaorental.models.rental.Rental;
 import com.lookfor.yanaorental.services.RentalService;
 import com.lookfor.yanaorental.services.auth.impl.AuthenticationFacade;
 import lombok.extern.slf4j.Slf4j;

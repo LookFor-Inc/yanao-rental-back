@@ -1,6 +1,6 @@
 package com.lookfor.yanaorental.models.equipment;
 
-import com.lookfor.yanaorental.models.Rental;
+import com.lookfor.yanaorental.models.rental.Rental;
 import lombok.Getter;
 import lombok.Setter;
 

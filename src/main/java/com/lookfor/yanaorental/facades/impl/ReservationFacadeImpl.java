@@ -5,7 +5,7 @@ import com.lookfor.json.schemas.generated.equipment_category.EquipmentTypeItemV1
 import com.lookfor.json.schemas.generated.reservation.ReservationEquipmentTypesAndRentalsV1;
 import com.lookfor.yanaorental.annotations.TransactionReadOnly;
 import com.lookfor.yanaorental.facades.ReservationFacade;
-import com.lookfor.yanaorental.models.Rental;
+import com.lookfor.yanaorental.models.rental.Rental;
 import com.lookfor.yanaorental.models.equipment.EquipmentCategory;
 import com.lookfor.yanaorental.models.equipment.EquipmentType;
 import com.lookfor.yanaorental.services.DtoConverter;

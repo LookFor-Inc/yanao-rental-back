@@ -18,4 +18,7 @@
     <!-- Create & insert EQUIPMENTS -->
     <include file="classpath:/db/changelog/equipment/20210523-equipments.va.create.sql"/>
     <include file="classpath:/db/changelog/equipment/20210523-equipments.va.insert.sql"/>
+    <!-- Create & insert RENTALS_WORK_TIMES -->
+    <include file="classpath:/db/changelog/rental/20210523-work-times.dv.create.sql"/>
+    <include file="classpath:/db/changelog/rental/20210523-work-times.dv.insert.sql"/>
 </databaseChangeLog>

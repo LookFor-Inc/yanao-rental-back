@@ -1,12 +1,15 @@
 package com.lookfor.yanaorental.controllers;
 
+import com.lookfor.json.schemas.generated.rental.RentalAllListResponse;
 import com.lookfor.json.schemas.generated.rental.RentalPublishRequest;
 import com.lookfor.json.schemas.generated.rental.RentalPublishResponse;
 import com.lookfor.yanaorental.annotations.AccessToRental;
 import com.lookfor.yanaorental.annotations.CurrentUserId;
+import com.lookfor.yanaorental.services.DtoConverter;
 import com.lookfor.yanaorental.services.RentalService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -24,6 +27,7 @@ import java.io.IOException;
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class RentalController {
     private RentalService rentalService;
+    private DtoConverter dtoConverter;
 
     @PostMapping
     @PreAuthorize("hasRole('LANDLORD')")
@@ -32,6 +36,11 @@ public class RentalController {
             @CurrentUserId Long userId
     ) {
         return rentalService.save(request, userId, RentalPublishResponse::new);
+    }
+
+    @GetMapping
+    public RentalAllListResponse takeAllRentals() {
+        return rentalService.fetchAll(dtoConverter::toRentalAllListResponse);
     }
 
     @AccessToRental(rentalId = "rentalId")

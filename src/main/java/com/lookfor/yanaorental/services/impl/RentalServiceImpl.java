@@ -6,7 +6,7 @@ import com.lookfor.yanaorental.annotations.TransactionReadOnly;
 import com.lookfor.yanaorental.annotations.TransactionRequired;
 import com.lookfor.yanaorental.exceptions.rest.NotFoundException;
 import com.lookfor.yanaorental.exceptions.rest.UserIsNotInRentalException;
-import com.lookfor.yanaorental.models.Rental;
+import com.lookfor.yanaorental.models.rental.Rental;
 import com.lookfor.yanaorental.models.user.User;
 import com.lookfor.yanaorental.repositories.RentalRepository;
 import com.lookfor.yanaorental.repositories.UserRepository;
@@ -15,11 +15,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 @Service
@@ -33,6 +32,12 @@ public class RentalServiceImpl implements RentalService {
     @TransactionReadOnly
     public List<Rental> fetchAll() {
         return rentalRepository.findAll();
+    }
+
+    @Override
+    @TransactionReadOnly
+    public <T> T fetchAll(Function<List<Rental>, T> toDto) {
+        return toDto.apply(fetchAll());
     }
 
     @Override

@@ -8,8 +8,8 @@ CREATE TABLE rentals (
     address   VARCHAR(512) NOT NULL,
     img       VARCHAR(128) NULL,
     owner_id  BIGSERIAL    NOT NULL,
-    latitude  FLOAT8 NULL,
-    longitude FLOAT8 NULL,
+    latitude  FLOAT8       NOT NULL,
+    longitude FLOAT8       NOT NULL,
     CONSTRAINT rentals_pkey PRIMARY KEY (id),
     CONSTRAINT users_fkey FOREIGN KEY (owner_id) REFERENCES users (id)
 );
