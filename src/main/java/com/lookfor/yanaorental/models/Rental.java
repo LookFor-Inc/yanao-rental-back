@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.net.URL;
 import java.util.List;
 
 @Getter
@@ -21,6 +22,15 @@ public class Rental {
 
     @Column(nullable = false, length = 512)
     private String address;
+
+    @Column(length = 128, nullable = false)
+    private URL img;
+
+    @Column
+    private Double latitude;
+
+    @Column
+    private Double longitude;
 
     @OneToMany(mappedBy = "rental", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Equipment> equipments;

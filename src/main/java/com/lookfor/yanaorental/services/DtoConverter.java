@@ -50,7 +50,9 @@ public class DtoConverter {
                     item.setId(r.getId());
                     item.setName(r.getName());
                     item.setAddress(r.getAddress());
-                    // TODO: add coordinates
+                    item.setImg(r.getImg());
+                    item.setLatitude(r.getLatitude());
+                    item.setLongitude(r.getLongitude());
                     return item;
                 })
                 .sorted(Comparator.comparing(RentalItemV1::getAddress))
