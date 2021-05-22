@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface EquipmentRepository extends JpaRepository<Equipment, Long> {
     @Query(value = """
-           SELECT new com.lookfor.yanaorental.models.equipment.EquipmentData(e.id, e.name, e.img, ec.name, et.name, e.totalCount, e.freeCount)
+           SELECT new com.lookfor.yanaorental.models.equipment.EquipmentData(e.id, e.name, e.img, ec.name, et.name, e.price, e.totalCount, e.freeCount)
            FROM Equipment e
            JOIN e.type et
            JOIN et.category ec

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.net.URL;
 
 @Getter
@@ -19,6 +20,8 @@ public class EquipmentData {
     private String category;
 
     private String type;
+
+    private BigDecimal price;
 
     private Long totalCount;
 

@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
+import java.math.BigDecimal;
 import java.net.URL;
 
 @Getter
@@ -21,6 +23,10 @@ public class Equipment {
 
     @Column
     private URL img;
+
+    @Column(nullable = false)
+    @Digits(integer = 7, fraction = 2)
+    private BigDecimal price;
 
     @Column(nullable = false)
     private Long totalCount;

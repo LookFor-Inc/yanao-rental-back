@@ -8,6 +8,7 @@ CREATE TABLE equipments (
     rental_id   BIGSERIAL    NOT NULL,
     "name"      VARCHAR(128) NOT NULL,
     img         VARCHAR(128) NOT NULL,
+    price  BIGSERIAL    NOT NULL,
     total_count BIGSERIAL    NOT NULL,
     free_count  BIGSERIAL    NOT NULL,
     CONSTRAINT equipments_pkey PRIMARY KEY (id),

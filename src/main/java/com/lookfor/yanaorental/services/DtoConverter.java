@@ -38,6 +38,7 @@ public class DtoConverter {
         item.setId(equipmentData.getId());
         item.setName(equipmentData.getName());
         item.setImg(equipmentData.getImg());
+        item.setPrice(equipmentData.getPrice().longValue());
         item.setTotalCount(equipmentData.getTotalCount());
         item.setFreeCount(equipmentData.getFreeCount());
         return item;
