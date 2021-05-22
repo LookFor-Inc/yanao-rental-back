@@ -6,6 +6,9 @@
     <!-- Create & insert USERS -->
     <include file="classpath:/db/changelog/user/20210523-users.va.create.sql"/>
     <include file="classpath:/db/changelog/user/20210523-users.va.insert.sql"/>
+    <!-- Create & insert USERS_INFO -->
+    <include file="classpath:/db/changelog/user/20210523-users-info.va.create.sql"/>
+    <include file="classpath:/db/changelog/user/20210523-users-info.va.insert.sql"/>
     <!-- Create & insert RENTALS -->
     <include file="classpath:/db/changelog/rental/20210523-rentals.va.create.sql"/>
     <include file="classpath:/db/changelog/rental/20210523-rentals.va.insert.sql"/>
