@@ -3,6 +3,9 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <!-- Create & insert USERS -->
+    <include file="classpath:/db/changelog/user/20210523-users.va.create.sql"/>
+    <include file="classpath:/db/changelog/user/20210523-users.va.insert.sql"/>
     <!-- Create & insert RENTALS -->
     <include file="classpath:/db/changelog/rental/20210523-rentals.va.create.sql"/>
     <include file="classpath:/db/changelog/rental/20210523-rentals.va.insert.sql"/>
@@ -15,4 +18,7 @@
     <!-- Create & insert EQUIPMENTS -->
     <include file="classpath:/db/changelog/equipment/20210523-equipments.va.create.sql"/>
     <include file="classpath:/db/changelog/equipment/20210523-equipments.va.insert.sql"/>
+    <!-- Create & insert RENTALS_WORK_TIMES -->
+    <include file="classpath:/db/changelog/rental/20210523-work-times.dv.create.sql"/>
+    <include file="classpath:/db/changelog/rental/20210523-work-times.dv.insert.sql"/>
 </databaseChangeLog>

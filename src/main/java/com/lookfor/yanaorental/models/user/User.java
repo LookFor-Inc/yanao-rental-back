@@ -1,5 +1,6 @@
 package com.lookfor.yanaorental.models.user;
 
+import com.lookfor.yanaorental.models.rental.Rental;
 import com.lookfor.yanaorental.models.auth.ProviderAuth;
 import com.lookfor.yanaorental.models.payments.Payment;
 import lombok.Getter;
@@ -37,6 +38,11 @@ public class User {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private UserType type;
+
+    @OneToMany(
+            mappedBy = "owner",
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<Rental> rentals;
 
     @OneToMany(
             mappedBy = "user",

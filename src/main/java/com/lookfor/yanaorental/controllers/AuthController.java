@@ -2,6 +2,7 @@ package com.lookfor.yanaorental.controllers;
 
 import com.lookfor.json.schemas.generated.OkResponse;
 import com.lookfor.json.schemas.generated.auth.*;
+import com.lookfor.yanaorental.annotations.AuthenticationRequired;
 import com.lookfor.yanaorental.events.OnGenerateResetLinkEvent;
 import com.lookfor.yanaorental.events.OnRegistrationCompleteEvent;
 import com.lookfor.yanaorental.exceptions.auth.InvalidTokenException;
@@ -12,12 +13,14 @@ import com.lookfor.yanaorental.services.auth.EmailVerificationTokenService;
 import com.lookfor.yanaorental.services.auth.PasswordResetTokenService;
 import com.lookfor.yanaorental.services.user.UserService;
 import com.lookfor.yanaorental.utils.CookieHelper;
+import com.lookfor.yanaorental.utils.CookieUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
@@ -86,5 +89,11 @@ public class AuthController {
     public OkResponse resetPassword(@RequestBody @Valid PasswordResetRequest passwordResetRequest) {
         userService.resetPassword(passwordResetRequest);
         return new OkResponse("Password changed successfully");
+    }
+
+    @AuthenticationRequired
+    @GetMapping("/check-auth")
+    public OkResponse checkAuth() {
+        return new OkResponse();
     }
 }

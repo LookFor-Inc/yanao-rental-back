@@ -1,6 +1,6 @@
 package com.lookfor.yanaorental.repositories;
 
-import com.lookfor.yanaorental.models.Rental;
+import com.lookfor.yanaorental.models.rental.Rental;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -25,4 +25,12 @@ public interface RentalRepository extends JpaRepository<Rental, Long> {
     default List<Rental> findByEquipmentTypeIds(List<Long> ids) {
         return findByEquipmentTypeIdsWithLength(ids, ids.size());
     }
+
+    @Query("""
+            SELECT (COUNT(r) > 0)
+            FROM Rental r
+            INNER JOIN r.owner u
+            WHERE r.id = ?1 AND u.id = ?2
+            """)
+    boolean existsByIdAndOwnerId(long rentalId, long userId);
 }

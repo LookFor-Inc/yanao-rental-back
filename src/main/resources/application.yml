@@ -15,6 +15,11 @@ spring:
       ddl-auto: update
   liquibase:
     change-log: classpath:/db/changelog/db.changelog-master.xml
+  servlet:
+    multipart:
+      max-file-size: 64MB
+      max-request-size: 64MB
+      enabled: true
   mail:
     host: ${SPRING_MAIL_HOST}
     username: ${SPRING_MAIL_USERNAME}
